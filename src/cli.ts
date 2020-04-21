@@ -6,6 +6,7 @@ import { githubImport } from './importers/github';
 import { jiraCsvImport } from './importers/jiraCsv';
 import { asanaCsvImport } from './importers/asanaCsv';
 import { pivotalCsvImport } from './importers/pivotalCsv';
+import { trelloCsvImport } from './importers/trelloCsv';
 
 inquirer.registerPrompt('filePath', require('inquirer-file-path'));
 
@@ -38,6 +39,10 @@ inquirer.registerPrompt('filePath', require('inquirer-file-path'));
             name: 'Pivotal (CSV export)',
             value: 'pivotalCsv',
           },
+          {
+            name: 'Trello (CSV export)',
+            value: 'trelloCsv',
+          },
         ],
       },
     ]);
@@ -56,6 +61,9 @@ inquirer.registerPrompt('filePath', require('inquirer-file-path'));
         break;
       case 'pivotalCsv':
         importer = await pivotalCsvImport();
+        break;
+      case 'trelloCsv':
+        importer = await trelloCsvImport();
         break;
       default:
         console.log(chalk.red(`Invalid importer`));
